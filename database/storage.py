@@ -7,12 +7,10 @@ class Database:
         self.db_path = db_path
         self._connection = None
 
-    # Эта хуйня заменяет async with aiosqlite.connect(БАЗА_ДАННЫХ) // Вызывается в самом начале всех функций класса
     async def __aenter__(self):
         await self.connect()
         return self
 
-    # Эта хуйня типо clean-up, закрывает коннекшены с БД, вызывается в конце каждой функции
     async def __aexit__(self, exc_type, exc, tb):
         await self.close()
 
